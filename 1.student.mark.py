@@ -71,27 +71,6 @@ def input_the_students_in_to_course(courses):
     for _ in range(numbers_students):
         student_info = input_student_information()
         course['std'].append(student_info)
-# def input_the_students_in_to_course(courses):
-#     course = seclect_course()
-#     while (True):
-#         for i in courses:
-#             check = True
-#             if course['id'] != i["id"]:
-#                 print("The course ID don't exists! Please try again. \n Input again!")
-#                 check = False
-#                 break
-#         if check == True:
-#             numbers_students = input_number_of_students(course['id'])
-#             if numbers_students > courses['sll']
-#                 print(f'Maximum number of students is: {course_sll} try again' )
-#                 return numbers_students
-#             for _ in range(numbers_students):
-#                 student_info = input_student_information()
-#                 course['std'].append(student_info)
-#             break
-#         else:
-#             return input_the_students_in_to_course(courses)
-#
 
 def input_student_marks(students, selected_course):
     marks = {}
