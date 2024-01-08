@@ -1,16 +1,21 @@
-
+courses = []
+# Function to input number course
 def input_number_of_courses():
     return int(input("Enter the number of courses: "))
 
-def seclect_course(courses):
-    course_id = input("Enter course ID: ")
-    return {"id": course_id}
-
-def list_courses(courses):
-    print("\nList of Courses:")
-    for course in courses:
-        print(f"{course['id']}: {course['name']}")
-
+#function to find the course
+def select_course_by_id():
+    if len(courses) == 0:
+        print("There aren't course yet!! PLS create it. ")
+        return create_courses(courses)
+    
+    course_id_to_select = int(input("Enter the course ID you want to select: "))
+    for i, course in enumerate(courses):
+        if course["id"] == course_id_to_select:
+            return i 
+    return 0 
+    
+#function create coure in4
 def input_course_information():
     course_id = input("Enter course ID: ")
     course_name = input("Enter course name: ")
@@ -18,6 +23,7 @@ def input_course_information():
     course_students = []
     return {"id": course_id, "name": course_name, "sll":course_sll, "std":course_students }
 
+#function create  many course in4 to store
 def create_courses(courses):
     num_courses = input_number_of_courses()
     for _ in range(num_courses):
@@ -34,52 +40,67 @@ def create_courses(courses):
                 break
             else:
                 course_info = input_course_information()
+ # function print the list of the course
+def list_courses(courses):
+    print("\nList of Courses:")
+    for course in courses:
+        print(f"{course['id']}: {course['name']} SLL: {course['sll']} ")
 
-def input_number_of_students(course_name):
-    number_students = int(input(f"Enter the number of students for course {course_name} (max 40): "))
+# funtion to input number of students in the select course
+def input_number_of_students(course_id):
+    number_students = int(input(f"Enter the number of students for course {course_id} (max 40): "))
     while number_students > 40:
         print("Can't add more than 40 students in 1 class!!\nPlease try again.")
-        number_students = int(input(f"Enter the number of students for course {course_name} (max 40): "))
+        number_students = int(input(f"Enter the number of students for course {course_id} (max 40): "))
     return number_students
 
+# funtion input information of student
 def input_student_information():
     student_id = input("Enter student ID: ")
     student_name = input("Enter student name: ")
     student_dob = input("Enter student date of birth: ")
-    return {"id": student_id, "name": student_name, "dob": student_dob}
+    student_mark = int(input("Enter student mark of course: "))
+    return {"id": student_id, "name": student_name, "dob": student_dob, "mark": student_mark}
 
-def input_the_students_in_to_course(courses,courses_id,course_students,course_sll):
-    if len(courses) == 0:
-        print("There aren't course yet!! PLS create it. ")
-        return create_courses(courses)
-    course = seclect_course(courses)
-    check = False
-    while not check:
-        for i in courses:
-            if course['id'] == i["id"]:
-                check = True
-                break
-        if not check:
-            print("The course ID doesn't exist! Please try again. \n Input again!")
-            course = seclect_course(courses)
+# funtion input students into course
+def input_the_students_in_to_course():
+    
+    course_index = select_course_by_id()
 
-    numbers_students = input_number_of_students(course['id'])
+    if course_index is not 0:
+        selected_course = courses[course_index]
+        numbers_students = int(input("Input the number students want to add to course: "))
+        if numbers_students > int(selected_course["sll"]):
+            print(f'Maximum number of students is: {selected_course["sll"]}. Please try again.')
+            return numbers_students
+        
+        for _ in range(numbers_students):
+            student_info = input_student_information()
+            selected_course["std"].append(student_info)
+
+    else:
+        print("Course not found with the given ID. Enter ID course agian!!")
 
 
 def input_student_marks(students, selected_course):
  
+def list_students():
+    selected_course_index = select_course_by_id()
 
-def list_students(students):
+    if selected_course_index is not 0:
+        selected_course = courses[selected_course_index]
+        print(f"\nList of Students in the {selected_course['name']}:")
+        for student in selected_course["std"]:
+            print(f"{student['id']}: {student['name']}")
+    else:
+        print("Course not found with the given ID.")
 
 
 
-def show_student_marks(students, marks, selected_course):
+def show_student_marks():
 
 
 def main():
-    students = []
-    courses = []
-    marks = {}
     while True:
         print("\nMenu:")
         print("1. Create a Courses")
@@ -101,11 +122,9 @@ def main():
         elif choice == "4":
             list_students(students)
         elif choice == "5":
-            selected_course = input_course_information()
-            marks[selected_course['id']] = input_student_marks(students, selected_course)
+            
         elif choice == "6":
-            selected_course = input_course_information()
-            show_student_marks(students, marks.get(selected_course['id'], {}), selected_course)
+            
         elif choice == "7":
             print("Exiting the program. Goodbye!")
             break
