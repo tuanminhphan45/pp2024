@@ -43,9 +43,12 @@ def create_courses(courses):
 
  # function print the list of the course
 def list_courses(courses):
-    print("\nList of Courses:")
-    for course in courses:
-        print(f"{course['id']}: {course['name']} SLL: {course['sll']} ")
+    if len(courses) == 0:
+        print(" Don't have any course! pls create")
+    else:
+        print("\nList of Courses:")
+        for course in courses:
+            print(f"{course['id']}: {course['name']} SLL: {course['sll']} ")
 
 # funtion to input number of students in the select course
 def input_number_of_students(course_id):
@@ -89,14 +92,14 @@ def list_students():
     selected_course_index = select_course_by_id()
     if len(selected_course_index['std']) == 0: 
         print(f"Don't have any student in {selected_course_index['name']}")
-        
-    if selected_course_index is not 0:
-        selected_course = courses[selected_course_index]
-        print(f"\nList of Students in the {selected_course['name']}:")
-        for student in selected_course["std"]:
-            print(f"{student['id']}: {student['name']}")
     else:
-        print("Course not found with the given ID.")
+        if selected_course_index is not 0:
+            selected_course = courses[selected_course_index]
+            print(f"\nList of Students in the {selected_course['name']}:")
+            for student in selected_course["std"]:
+                print(f"{student['id']}: {student['name']}")
+        else:
+            print("Course not found with the given ID.")
 
 
 
