@@ -40,6 +40,7 @@ def create_courses(courses):
                 break
             else:
                 course_info = input_course_information()
+
  # function print the list of the course
 def list_courses(courses):
     print("\nList of Courses:")
@@ -86,7 +87,9 @@ def input_student_marks(students, selected_course):
  
 def list_students():
     selected_course_index = select_course_by_id()
-
+    if len(selected_course_index['std']) == 0: 
+        print(f"Don't have any student in {selected_course_index['name']}")
+        
     if selected_course_index is not 0:
         selected_course = courses[selected_course_index]
         print(f"\nList of Students in the {selected_course['name']}:")
