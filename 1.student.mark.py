@@ -47,12 +47,25 @@ def input_number_of_students(course_id):
     return number_students
 
 # Function to input student information
-def input_student_information():
-    student_id = input("Enter student ID: ")
-    student_name = input("Enter student name: ")
-    student_dob = input("Enter student date of birth: ")
-    student_mark = int(input("Enter student mark of course: "))
-    return {"id": student_id, "name": student_name, "dob": student_dob, "mark": student_mark}
+def input_student_information(courses):
+    while True:
+        student_id = input("Enter student ID: ")
+        check = False
+        for course in courses:
+            for student in course['std']:
+                if student['id'] == student_id:
+                    print(f"Student ID '{student_id}' already exists. Please enter a different ID.")
+                    check = True
+                    break 
+
+            if check:
+                break 
+
+        if not check:
+            student_name = input("Enter student name: ")
+            student_dob = input("Enter student date of birth: ")
+            student_mark = int(input("Enter student mark of course: "))
+            return {"id": student_id, "name": student_name, "dob": student_dob, "mark": student_mark}
 
 # Function to input students into a course
 def input_the_students_in_to_course(courses):
@@ -64,7 +77,7 @@ def input_the_students_in_to_course(courses):
                 print(f'Maximum number of students is: {selected_course["sll"]}. Please try again.')
             else:
                 for _ in range(numbers_students):
-                    student_info = input_student_information()
+                    student_info = input_student_information(courses)
                     selected_course["std"].append(student_info)
                 break
     else:
@@ -110,7 +123,8 @@ def list_student_marks(courses):
 
 # Main function
 def main():
-    courses = []
+    courses = [{"id": 1, "name": "ADS", "sll": "2", "std": []},{"id": 2, "name": "Python", "sll": "3", 
+    "std": [{"id": "22BI13307", "name": "Minh", "mark":""},{"id": "22BI13302", "name": "Hung","mark":"9"},]},]
 
     while True:
         print("\nMenu:")
