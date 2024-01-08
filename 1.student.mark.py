@@ -48,7 +48,7 @@ def input_student_information():
     student_dob = input("Enter student date of birth: ")
     return {"id": student_id, "name": student_name, "dob": student_dob}
 
-def input_the_students_in_to_course(courses):
+def input_the_students_in_to_course(courses,courses_id,course_students,course_sll):
     if len(courses) == 0:
         print("There aren't course yet!! PLS create it. ")
         return create_courses(courses)
@@ -61,40 +61,19 @@ def input_the_students_in_to_course(courses):
                 break
         if not check:
             print("The course ID doesn't exist! Please try again. \n Input again!")
-            course = seclect_course()
+            course = seclect_course(courses)
 
     numbers_students = input_number_of_students(course['id'])
-    if numbers_students > courses['sll'] :
-        print(f'Maximum number of students is: {courses["sll"]}. Please try again.')
-        return create_courses(courses)
 
-    for _ in range(numbers_students):
-        student_info = input_student_information()
-        course['std'].append(student_info)
 
 def input_student_marks(students, selected_course):
-    marks = {}
-    for student in students:
-        while True:
-                mark = float(input(f"Enter mark for {student['name']} in {selected_course['name']} (0 - 20): "))
-                if 0 <= mark <= 20:
-                    marks[student['id']] = mark
-                    break
-                else:
-                    print("Invalid mark! Please enter a mark between 0 and 20.")
-    return marks
+ 
 
 def list_students(students):
-    print("\nList of Students:")
-    for student in students:
-        print(f"{student['id']}: {student['name']}")
+
 
 
 def show_student_marks(students, marks, selected_course):
-    print(f"\nStudent marks for {selected_course['name']}:")
-    for student in students:
-        mark = marks.get(student['id'], "N/A")
-        print(f"{student['name']}: {mark}")
 
 
 def main():
