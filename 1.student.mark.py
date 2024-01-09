@@ -135,7 +135,7 @@ def main():
         print("5. Show Student Marks for a Course")
         print("6. Exit")
 
-        choice = input("Enter your choice (1-7): ")
+        choice = input("Enter your choice (1-6): ")
 
         if choice == "1":
             create_courses(courses)
