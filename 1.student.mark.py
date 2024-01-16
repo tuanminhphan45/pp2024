@@ -1,7 +1,11 @@
 import datetime
 # Function to input number of courses
 def input_number_of_courses():
-    return int(input("Enter the number of courses: "))
+    while True:
+        try:
+            return int(input("Enter the number of courses: "))
+        except:
+            print("Invalid input. Please enter a valid number.")
 
 # Function to find the course by ID
 def select_course_by_id(courses):
@@ -68,8 +72,8 @@ def input_student_information(courses):
                 dob_str = input("Enter student date of birth (format: dd/mm/yyyy): ")
                 try:
                     student_dob = datetime.datetime.strptime(dob_str, "%d/%m/%Y").date()
-                    break  # Exit the loop if the date format is correct
-                except ValueError:
+                    break 
+                except :
                     print("Incorrect date format! Please use dd/mm/yyyy.")
             student_mark = int(input("Enter student mark of course: "))
             return {"id": student_id, "name": student_name, "dob": student_dob, "mark": student_mark}
