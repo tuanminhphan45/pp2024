@@ -1,3 +1,4 @@
+import datetime
 class Course:
     def __init__(self, course_id, course_name, max_students):
         self.id = course_id
@@ -73,7 +74,13 @@ def input_student_information(courses):
 
         if not check:
             student_name = input("Enter student name: ")
-            student_dob = input("Enter student date of birth: ")
+            while True:
+                dob_str = input("Enter student date of birth (format: dd/mm/yyyy): ")
+                try:
+                    student_dob = datetime.datetime.strptime(dob_str, "%d/%m/%Y").date()
+                    break  
+                except :
+                    print("Incorrect date format! Please use dd/mm/yyyy.")
             student_mark = int(input("Enter student mark of course: "))
             return Student(student_id, student_name, student_dob, student_mark)
 
