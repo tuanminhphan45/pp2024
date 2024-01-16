@@ -1,3 +1,4 @@
+import datetime
 # Function to input number of courses
 def input_number_of_courses():
     return int(input("Enter the number of courses: "))
@@ -63,7 +64,13 @@ def input_student_information(courses):
 
         if not check:
             student_name = input("Enter student name: ")
-            student_dob = input("Enter student date of birth: ")
+            while True:
+                dob_str = input("Enter student date of birth (format: dd/mm/yyyy): ")
+                try:
+                    student_dob = datetime.datetime.strptime(dob_str, "%d/%m/%Y").date()
+                    break  # Exit the loop if the date format is correct
+                except ValueError:
+                    print("Incorrect date format! Please use dd/mm/yyyy.")
             student_mark = int(input("Enter student mark of course: "))
             return {"id": student_id, "name": student_name, "dob": student_dob, "mark": student_mark}
 
@@ -90,7 +97,7 @@ def list_courses(courses):
     else:
         print("\nList of Courses:")
         for course in courses:
-            print(f"{course['id']}: {course['name']} SLL: {course['sll']} ")
+            print(f"{course['id']}: {course['name']} Number of students in this course: {course['sll']} ")
 
 # Function to list students in a course
 def list_students(courses):
@@ -123,8 +130,7 @@ def list_student_marks(courses):
 
 # Main function
 def main():
-    courses = [{"id": 1, "name": "ADS", "sll": "2", "std": []},{"id": 2, "name": "Python", "sll": "3", 
-    "std": [{"id": "22BI13307", "name": "Minh", "mark":""},{"id": "22BI13302", "name": "Hung","mark":"9"},]},]
+    courses = [{"id": 1, "name": "ADS", "sll": "2", "std": []},]
 
     while True:
         print("\nMenu:")
