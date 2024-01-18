@@ -1,5 +1,5 @@
 import datetime
-
+from math import *
 class Course:
     def __init__(self, course_id, course_name, max_students):
         self.id = course_id
@@ -83,12 +83,7 @@ def input_number_of_students(course_id):
         print("Can't add more than 40 students in 1 class!!\nPlease try again.")
         number_students = int(input(f"Enter the number of students for course {course_id} (max 40): "))
     return number_students
-# def fix_dob(dob):
-#     if dob[1] == "/":
-#         dob = "0" + dob
-#     if dob[4] == "/":
-#         dob = dob[0:3]+'0'+dob
-
+ 
 def input_student_information(courses):
     while True:
         student_id = input("Enter student ID: ")
