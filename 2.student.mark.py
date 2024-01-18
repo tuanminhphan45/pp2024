@@ -16,24 +16,21 @@ class Course:
     def add_student(self, student):
         self.students.append(student)
 
-class Student(Course):
-    def __init__(self, student__id, student_name, dob, mark):
-        Course.__init__(self,student__id,student_name)
+class Student():
+    def __init__(self, id, name, dob, mark):
+        self.__student_id = id
+        self.student_name = name
         self.__dob = dob
         self.__mark = mark
 
     def get_id(self):
-        return self.__id
+        return self.__student_id
 
     def get_dob(self):
         return self.__dob
 
     def get_mark(self):
         return self.__mark
-
-
-
-
 
 
 
@@ -89,7 +86,8 @@ def input_student_information(courses):
         check = False
         for course in courses:
             for student in course.students:
-                if student.id == student_id:
+                id = student.get_id()
+                if id == student_id:
                     print(f"Student ID '{student_id}' already exists. Please enter a different ID.")
                     check = True
                     break 
@@ -135,11 +133,12 @@ def list_students(courses):
     selected_course = select_course_by_id(courses)
     if selected_course is not None:
         if len(selected_course.students) == 0:
-             print(f"There are no students in {selected_course.name}")
+            print(f"There are no students in {selected_course.name}")
         else:
             print(f"Students in {selected_course.name} course:")
             for student in selected_course.students:
-                print(f"ID: {student.id} - Name: {student.name}")
+                id = student.get_id()
+                print(f"ID: {id} - Name: {student.student_name}")
     else:
         print("Course not found with the given ID.")
 
@@ -151,15 +150,17 @@ def list_student_marks(courses):
         else:
             print(f"Student Marks in {selected_course.name} course:")
             for student in selected_course.students:
-                if student.mark == "":
+                mark = student.get_mark()
+                id = student.get_id()
+                if mark == "":
                    print(f"ID: {student.id} - Name: {student.name} - Mark: N/A") 
-                else: print(f"ID: {student.id} - Name: {student.name} - Mark: {student.mark}")
+                else:print(f"ID: {id} - Name: {student.student_name} - Mark: {mark}")
     else:
         print("Course not found with the given ID.")
 
 def main():
-    courses = [Course(1, "ADS", 2), Course(2, "Python", 3)]
-
+    courses = [Course(1, "ADS", 2,), Course(2, "Python", 3)]
+    
     while True:
         print("\nMenu:")
         print("1. Create Courses")
