@@ -15,6 +15,9 @@ class Course:
 
     def add_student(self, student):
         self.students.append(student)
+    
+    def list(self):
+        print(f"Course ID: {self.id}, Name: {self.name}, Max Students: {self.max_students}")
 
 class Student():
     def __init__(self, id, name, dob, mark):
@@ -31,7 +34,8 @@ class Student():
 
     def get_mark(self):
         return self.__mark
-
+    def list(self):
+        print(f"Student ID: {self.__student_id}, Name: {self.student_name}, DOB: {self.__dob}, Mark: {self.__mark}")
 
 
 def input_number_of_courses():
@@ -127,7 +131,7 @@ def list_courses(courses):
     else:
         print("\nList of Courses:")
         for course in courses:
-            print(f"{course.id}: {course.name} Max Students: {course.max_students}")
+            course.list()
 
 def list_students(courses):
     selected_course = select_course_by_id(courses)
@@ -137,8 +141,7 @@ def list_students(courses):
         else:
             print(f"Students in {selected_course.name} course:")
             for student in selected_course.students:
-                id = student.get_id()
-                print(f"ID: {id} - Name: {student.student_name}")
+                student.list()
     else:
         print("Course not found with the given ID.")
 
