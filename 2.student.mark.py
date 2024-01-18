@@ -1,4 +1,5 @@
 import datetime
+
 class Course:
     def __init__(self, course_id, course_name, max_students):
         self.id = course_id
@@ -6,12 +7,35 @@ class Course:
         self.max_students = max_students
         self.students = []
 
-class Student:
-    def __init__(self, student_id, student_name, dob, mark):
-        self.id = student_id
-        self.name = student_name
-        self.dob = dob
-        self.mark = mark
+    def get_max_students(self):
+        return self.max_students
+
+    def get_students(self):
+        return self.students
+
+    def add_student(self, student):
+        self.students.append(student)
+
+class Student(Course):
+    def __init__(self, student__id, student_name, dob, mark):
+        Course.__init__(self,student__id,student_name)
+        self.__dob = dob
+        self.__mark = mark
+
+    def get_id(self):
+        return self.__id
+
+    def get_dob(self):
+        return self.__dob
+
+    def get_mark(self):
+        return self.__mark
+
+
+
+
+
+
 
 def input_number_of_courses():
     return int(input("Enter the number of courses: "))
