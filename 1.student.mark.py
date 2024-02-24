@@ -75,7 +75,8 @@ def input_student_information(courses):
                     break 
                 except :
                     print("Incorrect date format! Please use dd/mm/yyyy.")
-            student_mark = int(input("Enter student mark of course: "))
+            student_mark_input = input("Enter student mark of course (press Enter for no mark): ")
+            student_mark = float(student_mark_input) if student_mark_input else ""
             return {"id": student_id, "name": student_name, "dob": student_dob, "mark": student_mark}
 
 # Function to input students into a course
@@ -125,9 +126,10 @@ def list_student_marks(courses):
         else:
             print(f"Student Marks in {selected_course['name']} course:")
             for student in selected_course['std']:
-                if len(student['mark']) == 0:
+                if student['mark'] == "":
                    print(f"ID: {student['id']} - Name: {student['name']} - Mark: N/A") 
-                else: print(f"ID: {student['id']} - Name: {student['name']} - Mark: {student['mark']}")
+                else:
+                    print(f"ID: {student['id']} - Name: {student['name']} - Mark: {student['mark']}")
     else:
         print("Course not found with the given ID.")
 
