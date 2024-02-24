@@ -1,11 +1,13 @@
+import numpy
 import datetime
 from math import *
 class Course:
-    def __init__(self, course_id, course_name, max_students):
+    def __init__(self, course_id, course_name, max_students, course_credit):
         self.id = course_id
         self.name = course_name
         self.max_students = max_students
         self.students = []
+        self.credit = course_credit
 
     def get_max_students(self):
         return self.max_students
@@ -17,7 +19,7 @@ class Course:
         self.students.append(student)
     
     def list(self):
-        print(f"Course ID: {self.id}, Name: {self.name}, Max Students: {self.max_students}")
+        print(f"Course ID: {self.id}, Name: {self.name},The credit of this course: {self.credit}, Max Students: {self.max_students}")
 
 class Student():
     def __init__(self, id, name, dob, mark):
@@ -33,10 +35,12 @@ class Student():
         return self.__dob
 
     def get_mark(self):
-        return self.__mark
+        return floor(self.__mark * 10) / 10
     def list(self):
         print(f"Student ID: {self.__student_id}, Name: {self.student_name}, DOB: {self.__dob}, Mark: {self.__mark}")
 
+    def Gpa(self):
+        
 
 def input_number_of_courses():
     return int(input("Enter the number of courses: "))
